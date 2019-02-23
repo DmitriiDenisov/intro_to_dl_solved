@@ -1,6 +1,8 @@
 # Introduction to Deep Learning course resources
 https://www.coursera.org/learn/intro-to-deep-learning
+
 Здесь все решения для недель 1-5
+
 Нет папки Readonly!
 
 ## Running on Google Colab (tested for all weeks)
