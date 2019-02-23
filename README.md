@@ -5,6 +5,10 @@ https://www.coursera.org/learn/intro-to-deep-learning
 
 Нет папки Readonly!
 
+Если не работает строка
+download_utils.link_all_keras_resources()
+то просто удалить её
+
 ## Running on Google Colab (tested for all weeks)
 Google has released its own flavour of Jupyter called Colab, which has free GPUs!
 

@@ -36,15 +36,18 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2):
 
 @retry(Exception)
 def download_file(url, file_path):
+    #from tqdm import tqdm
     r = requests.get(url, stream=True)
     total_size = int(r.headers.get('content-length'))
     bar = tqdm_utils.tqdm_notebook_failsafe(total=total_size, unit='B', unit_scale=True)
+    #pbar = tqdm(total=total_size)
     bar.set_description(os.path.split(file_path)[-1])
     incomplete_download = False
     try:
         with open(file_path, 'wb', buffering=16 * 1024 * 1024) as f:
             for chunk in r.iter_content(4 * 1024 * 1024):
                 f.write(chunk)
+                #pbar.update(len(chunk))
                 bar.update(len(chunk))
     except Exception as e:
         raise e
@@ -157,7 +160,10 @@ def download_week_6_resources(save_path):
 
 
 def link_all_keras_resources():
-    link_all_files_from_dir("../readonly/keras/datasets/", os.path.expanduser("~/.keras/datasets"))
+    try:
+        link_all_files_from_dir("../readonly/keras/datasets/", os.path.expanduser("~/.keras/datasets"))
+    except:
+        pass
     link_all_files_from_dir("../readonly/keras/models/", os.path.expanduser("~/.keras/models"))
 
 
@@ -171,3 +177,6 @@ def link_week_4_resources():
 
 def link_week_6_resources():
     link_all_files_from_dir("../readonly/week6/", ".")
+
+if __name__ == '__main__':
+    download_all_keras_resources(keras_datasets='readonly/keras/datasets', keras_models='readonly/keras/models')
